@@ -21,4 +21,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="9.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GumpFinanca.Domain\GumpFinanca.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

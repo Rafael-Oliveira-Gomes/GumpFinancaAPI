@@ -1,19 +1,20 @@
-using GumpFinanca.MySql.Context;
+using GumpFinanca.Application.Handlers;
 using GumpFinanca.MySql.Repositories;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.EntityFrameworkCore;
+using GumpFinancaAPI.Extensions;
+using GumpFinancaAPI.Extensions.SwaggerConfigurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("FinancaConnection");
+builder.Services
+    .AddSwaggerConfig(builder.Configuration)
+    .AddControllers();
 
-builder.Services.AddDbContext<MySqlContext>(options =>
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+builder.Services.AddCustomCors();
+
+builder.Services.AddRepository(builder.Configuration);
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(IncluirTransactionHandler).Assembly));
 
 var app = builder.Build();
-
-
-await app.RunAsync();
 
 app.UseSwagger();
 app.UseSwaggerUI(options =>

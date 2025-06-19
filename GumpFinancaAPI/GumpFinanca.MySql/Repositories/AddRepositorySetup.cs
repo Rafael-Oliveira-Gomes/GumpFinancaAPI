@@ -18,7 +18,6 @@ public static class AddRepositorySetup
                 ServerVersion.AutoDetect(configuration.GetConnectionString("FinancaConnection"))
             );
         });
-        services.AddScoped<IBaseRepository<Transaction>, BaseRepository<Transaction>>();
         services.AddScoped<ITransactionRepository, TransactionRepository>();
         return services;
     }
