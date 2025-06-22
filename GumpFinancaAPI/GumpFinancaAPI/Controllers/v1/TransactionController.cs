@@ -1,4 +1,5 @@
 ﻿using GumpFinanca.Domain.Entities.Command;
+using GumpFinanca.Domain.Entities.Queries;
 using GumpFinanca.Domain.Entities.ViewModel;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -35,5 +36,19 @@ public class transactionController : ControllerBase
     {
         var result = await _mediator.Send(command);
         return CreatedAtAction(nameof(Post), new { id = result.Id }, result);
+    }
+
+    /// <summary>
+    /// Retorna todas as transações financeiras.
+    /// </summary>
+    /// <returns>Lista de transações.</returns>
+    /// <response code="200">Transações retornadas com sucesso.</response>
+    [HttpGet]
+    [ProducesResponseType(typeof(IEnumerable<TransactionViewModel>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<IEnumerable<TransactionViewModel>>> Get()
+    {
+        var query = new TransactionQuery();
+        var result = await _mediator.Send(query);
+        return Ok(result);
     }
 }

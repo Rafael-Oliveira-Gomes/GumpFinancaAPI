@@ -5,7 +5,7 @@
 /// </summary>
 public static class CorsConfigurationExtensions
 {
-    private const string CorsPolicyName = "AllowLocalhost5000";
+    private const string CorsPolicyName = "AllowLocalhost4200";
 
     /// <summary>
     /// Adds a custom CORS policy to the service collection.
@@ -18,7 +18,7 @@ public static class CorsConfigurationExtensions
         {
             options.AddPolicy(CorsPolicyName, policy =>
             {
-                policy.WithOrigins("http://localhost:5000")
+                policy.WithOrigins("http://localhost:4200")
                       .AllowAnyHeader()
                       .AllowAnyMethod();
             });
@@ -29,9 +29,9 @@ public static class CorsConfigurationExtensions
     /// <summary>
     /// Configures the application to use the custom CORS policy.
     /// </summary>
-    /// <param name="app">The application builder to configure.</param>
-    /// <returns>The updated application builder.</returns>
-    public static IApplicationBuilder UseCustomCors(this IApplicationBuilder app)
+    /// <param name="app">The WebApplication to configure.</param>
+    /// <returns>The updated WebApplication.</returns>
+    public static WebApplication UseCustomCors(this WebApplication app)
     {
         app.UseCors(CorsPolicyName);
         return app;
