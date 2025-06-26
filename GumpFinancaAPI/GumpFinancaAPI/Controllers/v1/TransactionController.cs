@@ -47,8 +47,7 @@ public class transactionController : ControllerBase
     [ProducesResponseType(typeof(IEnumerable<TransactionViewModel>), StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<TransactionViewModel>>> Get()
     {
-        var query = new TransactionQuery();
-        var result = await _mediator.Send(query);
+        var result = await _mediator.Send(new TransactionQuery());
         return Ok(result);
     }
 }
