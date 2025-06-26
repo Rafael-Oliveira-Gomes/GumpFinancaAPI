@@ -12,11 +12,11 @@ public class IncluirTransactionHandler(ITransactionRepository transactionReposit
     {
         var transaction = new Transaction
         {
-            Description = request.description,
-            Amount = request.amount,
-            Date = request.date,
-            Category = request.category,
-            Type = request.type
+            Description = request.Description,
+            Amount = request.Amount,
+            Date = request.Date,
+            Category = request.Category,
+            Type = request.Type
         };
         await transactionRepository.AddAsync(transaction);
         return new TransactionViewModel(transaction);
